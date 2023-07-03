@@ -22,8 +22,43 @@ import javax.imageio.ImageIO;
 public class Mavenproject1 {
 
     public static void main(String[] args) {
-       try {
-        BufferedImage imagen = ImageIO.read(new File("facturas/tycg_qr0003.png"));
+        // Ruta de la carpeta que contiene las imágenes
+        String folderPath = "facturas";
+
+        // Crear objeto File para la carpeta
+        File folder = new File(folderPath);
+
+        // Obtener la lista de archivos en la carpeta
+        File[] files = folder.listFiles();
+
+        // Verificar si la carpeta existe y contiene archivos
+        if (folder.exists() && folder.isDirectory() && files != null) {
+            // Iterar sobre cada archivo en la carpeta
+            for (File file : files) {
+                // Verificar si es un archivo de imagen
+                if (isImageFile(file)) {
+                    // Obtener el nombre del archivo
+                    String ImagenRuta = file.getAbsolutePath();
+                    String url = Leerqr(ImagenRuta).replace(" ", "");
+                    System.out.println(url);
+
+                }
+            }
+        } else {
+            System.out.println("La carpeta no existe o no contiene archivos.");
+        }
+    }
+
+    // Método para verificar si un archivo es una imagen
+    private static boolean isImageFile(File file) {
+        String fileName = file.getName().toLowerCase();
+        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||
+                fileName.endsWith(".png") || fileName.endsWith(".gif");
+    }
+    
+    public static String Leerqr (String ImageRuta){     
+    try {
+        BufferedImage imagen = ImageIO.read(new File(ImageRuta));
         int[] pixels = imagen.getRGB(0, 0, imagen.getWidth(), imagen.getHeight(), null, 0, imagen.getWidth());
 
         RGBLuminanceSource fuente = new RGBLuminanceSource(imagen.getWidth(), imagen.getHeight(), pixels);
@@ -32,9 +67,10 @@ public class Mavenproject1 {
         Reader lector = new MultiFormatReader();
         Result resultado = lector.decode(bitmap);
 
-        System.out.println( resultado.getText());
+        return  resultado.getText();
     } catch (Exception e) {
         e.printStackTrace();
+        return " ";
     }
     }
 }
