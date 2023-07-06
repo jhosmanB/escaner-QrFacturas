@@ -69,7 +69,7 @@ public class Mavenproject1 {
 
         return  resultado.getText();
     } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("error en escaner imagen");
         return " ";
     }
     }
