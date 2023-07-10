@@ -9,22 +9,39 @@ package com.mycompany.mavenproject1;
  * @author CETIC 16
  */
 
+import backend.ManejadorUrl;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Reader;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import frontend.PanelGui;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 public class Mavenproject1 {
 
     public static void main(String[] args) {
+        JFrame frame = new JFrame("Mi Aplicación"); // Cambia el título a tu preferencia
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        PanelGui panel = new PanelGui();
+//      panel.onIniciar(direccionIP, contrasena, rutaArchivo);
+        frame.getContentPane().add(panel);
+
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         // Ruta de la carpeta que contiene las imágenes
         String folderPath = "facturas";
 
+        //
+        ManejadorUrl manejadorUrl = new ManejadorUrl();
+        ArrayList<String> urls = new ArrayList<>();
         // Crear objeto File para la carpeta
         File folder = new File(folderPath);
 
@@ -40,12 +57,16 @@ public class Mavenproject1 {
                     // Obtener el nombre del archivo
                     String ImagenRuta = file.getAbsolutePath();
                     String url = Leerqr(ImagenRuta).replace(" ", "");
+                    if(!url.equalsIgnoreCase("")){
                     System.out.println(url);
-
+                    urls.add(url);}                   
                 }
             }
         } else {
             System.out.println("La carpeta no existe o no contiene archivos.");
+        }
+        if(!urls.isEmpty()){
+            manejadorUrl.DescargarPdfs(urls);
         }
     }
 
