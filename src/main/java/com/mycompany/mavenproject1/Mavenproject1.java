@@ -26,9 +26,9 @@ import javax.swing.JFrame;
 public class Mavenproject1 {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Mi Aplicación"); // Cambia el título a tu preferencia
+        JFrame frame = new JFrame("Descargar Pdfs de facturas"); // Cambia el título a tu preferencia
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setResizable(false);
         PanelGui panel = new PanelGui();
 //      panel.onIniciar(direccionIP, contrasena, rutaArchivo);
         frame.getContentPane().add(panel);
@@ -65,6 +65,7 @@ public class Mavenproject1 {
                     String ImagenRuta = file.getAbsolutePath();
                     String url = Leerqr(ImagenRuta).replace(" ", "");
                     if(!url.equalsIgnoreCase("")){
+                    System.out.println(url);
                     urls.add(url);}                   
                 }
             }
