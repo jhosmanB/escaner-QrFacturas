@@ -59,6 +59,7 @@ public class PanelGui extends javax.swing.JPanel {
         });
 
         seleccionArchivo.setText("Archivo");
+        seleccionArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         seleccionArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seleccionArchivoActionPerformed(evt);
