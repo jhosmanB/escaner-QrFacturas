@@ -37,9 +37,16 @@ public class Mavenproject1 {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         // Ruta de la carpeta que contiene las imágenes
-        String folderPath = "facturas";
+       
+    }
 
-        //
+    // Método para verificar si un archivo es una imagen
+    private static boolean isImageFile(File file) {
+        String fileName = file.getName().toLowerCase();
+        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||
+                fileName.endsWith(".png") || fileName.endsWith(".gif");
+    }
+    public static void descargarFacturas(String folderPath){
         ManejadorUrl manejadorUrl = new ManejadorUrl();
         ArrayList<String> urls = new ArrayList<>();
         // Crear objeto File para la carpeta
@@ -58,7 +65,6 @@ public class Mavenproject1 {
                     String ImagenRuta = file.getAbsolutePath();
                     String url = Leerqr(ImagenRuta).replace(" ", "");
                     if(!url.equalsIgnoreCase("")){
-                    System.out.println(url);
                     urls.add(url);}                   
                 }
             }
@@ -68,16 +74,9 @@ public class Mavenproject1 {
         if(!urls.isEmpty()){
             manejadorUrl.DescargarPdfs(urls);
         }
-    }
-
-    // Método para verificar si un archivo es una imagen
-    private static boolean isImageFile(File file) {
-        String fileName = file.getName().toLowerCase();
-        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||
-                fileName.endsWith(".png") || fileName.endsWith(".gif");
-    }
     
-    public static String Leerqr (String ImageRuta){     
+    }
+    private static String Leerqr (String ImageRuta){     
     try {
         BufferedImage imagen = ImageIO.read(new File(ImageRuta));
         int[] pixels = imagen.getRGB(0, 0, imagen.getWidth(), imagen.getHeight(), null, 0, imagen.getWidth());

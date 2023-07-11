@@ -4,9 +4,12 @@
  */
 package frontend;
 
+import com.mycompany.mavenproject1.Mavenproject1;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 public class PanelGui extends javax.swing.JPanel {
 
     /**
@@ -29,8 +32,8 @@ public class PanelGui extends javax.swing.JPanel {
         dirCarpeta = new javax.swing.JTextField();
         seleccionArchivo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        dirCarpeta1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        facturas = new javax.swing.JTextField();
+        Iniciar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel1.setText("Pdfs de salida");
@@ -55,19 +58,19 @@ public class PanelGui extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel2.setText("Imagenes de facturas");
 
-        dirCarpeta1.setEditable(false);
-        dirCarpeta1.setBackground(new java.awt.Color(255, 255, 255));
-        dirCarpeta1.setFocusTraversalPolicyProvider(true);
-        dirCarpeta1.addActionListener(new java.awt.event.ActionListener() {
+        facturas.setEditable(false);
+        facturas.setBackground(new java.awt.Color(255, 255, 255));
+        facturas.setFocusTraversalPolicyProvider(true);
+        facturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dirCarpeta1ActionPerformed(evt);
+                facturasActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Iniciar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Iniciar.setText("Iniciar");
+        Iniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                IniciarActionPerformed(evt);
             }
         });
 
@@ -81,7 +84,7 @@ public class PanelGui extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(dirCarpeta1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(facturas, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(seleccionArchivo)))
                     .addGroup(layout.createSequentialGroup()
@@ -93,7 +96,7 @@ public class PanelGui extends javax.swing.JPanel {
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(86, 86, 86)
-                                .addComponent(jButton1)))
+                                .addComponent(Iniciar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(63, 63, 63))
         );
@@ -105,13 +108,13 @@ public class PanelGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seleccionArchivo)
-                    .addComponent(dirCarpeta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(facturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dirCarpeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jButton1)
+                .addComponent(Iniciar)
                 .addGap(74, 74, 74))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -123,32 +126,44 @@ public class PanelGui extends javax.swing.JPanel {
     private void seleccionArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionArchivoActionPerformed
 
         JFileChooser fileChooser = new JFileChooser();
-
-        // Filtrar solo los archivos con extensión CSV
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos CSV", "csv");
-        fileChooser.setFileFilter(filter);
-
+    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         // Mostrar el diálogo de selección de archivos
         int result = fileChooser.showOpenDialog(this);
-
+        
         // Si se selecciona un archivo, mostrar su ruta en el campo de texto
         if (result == JFileChooser.APPROVE_OPTION) {
-            dirCarpeta.setText(fileChooser.getSelectedFile().getPath());}
+            
+            facturas.setText(fileChooser.getSelectedFile().getPath());}
     }//GEN-LAST:event_seleccionArchivoActionPerformed
 
-    private void dirCarpeta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirCarpeta1ActionPerformed
+    private void facturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dirCarpeta1ActionPerformed
+    }//GEN-LAST:event_facturasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String rutaArchivo = facturas.getText();
+        if (rutaArchivo.isEmpty() ) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                onIniciar( rutaArchivo);
+            } catch (IOException ex) {
+                Logger.getLogger(PanelGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }//GEN-LAST:event_IniciarActionPerformed
+ public void onIniciar( String rutaArchivo) throws IOException {
+            Mavenproject1.descargarFacturas(rutaArchivo);
+            JOptionPane.showMessageDialog(this, "Completado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Iniciar;
     private javax.swing.JTextField dirCarpeta;
-    private javax.swing.JTextField dirCarpeta1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField facturas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton seleccionArchivo;
